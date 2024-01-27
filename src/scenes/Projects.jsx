@@ -23,7 +23,7 @@ const Project = ({ title, img, desc, link, preview, ratio }) => {
 
   return (
     <section
-      className={`basis-full p-4 flex lg:justify-between justify-center items-center`}
+      className={`basis-full p-2 flex lg:justify-between justify-center items-center`}
     >
       <section className="relative">
         <div className={overlayStyles}>
