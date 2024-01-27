@@ -23,7 +23,7 @@ const Project = ({ title, img, desc, link, preview, ratio }) => {
 
   return (
     <section
-      className={`basis-full flex lg:justify-between justify-center items-center`}
+      className={`basis-full p-4 flex lg:justify-between justify-center items-center`}
     >
       <section className="relative">
         <div className={overlayStyles}>
@@ -38,7 +38,7 @@ const Project = ({ title, img, desc, link, preview, ratio }) => {
         <div
           className={twMerge(
             ratio === 'long' && 'ss:w-[360px] w-[320px]',
-            ratio === 'wide' && 'ss:w-[440px] w-[320px]'
+            ratio === 'wide' && 'ss:w-[420px] w-[320px]'
           )}
         >
           <img
