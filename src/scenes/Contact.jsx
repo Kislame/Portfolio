@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 
-const Contact = () => {
+const Contact = ({ setSelectedPage }) => {
   const {
     register,
     trigger,
@@ -17,7 +17,12 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacts" className="contact py-48">
+    <motion.section
+      onViewportEnter={() => setSelectedPage('contacts')}
+      viewport={{ amount: 1 }}
+      id="contacts"
+      className="contact border-b border-split snap-center  h-screen pt-48"
+    >
       {/* HEADINGS */}
       <motion.div
         initial="hidden"
@@ -31,14 +36,14 @@ const Contact = () => {
         className="flex justify-center w-full"
       >
         <div>
-          <h2 className="font-playfair font-semibold ss:text-4xl text-2xl mb-8">
+          <h2 className="font-playfair font-semibold ss:text-4xl  text-center text-xl mb-8">
             CONTACT ME TO GET STARTED
           </h2>
         </div>
       </motion.div>
 
       {/* FORM & IMAGE */}
-      <div className="md:flex justify-center  mt-5">
+      <div className="sm:flex justify-center  mt-5 w-5/6 sm:w-full mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -117,7 +122,7 @@ const Contact = () => {
           </form>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

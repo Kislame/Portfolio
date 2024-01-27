@@ -9,13 +9,16 @@ export default {
         blue: '#2CBCE9',
         red: '#DC4492',
         yellow: '#FDCC49',
+        beige: '#F4DFC8',
         grey: '#ededed',
         'dark-grey': '#757575',
         'opaque-black': 'rgba(0,0,0,0.35)',
+        'curved-gray': 'rgb(41,41,41)',
         primary: '#2F3841',
         dark: '#1D1F21',
         'p-gray': '#CBEBFF',
         'p-blue': '#33B1FF',
+        split: '#60606080',
       },
       backgroundImage: (theme) => ({
         'gradient-rainbow':
@@ -29,6 +32,7 @@ export default {
           'linear-gradient(90deg, #24CBFF 14.53%, #FC59FF 69.36%, #FFBD0C 117.73%)',
         'gradient-blue':
           ' linear-gradient(192.02deg, #40C9FF 23.44%, rgba(89, 69, 166, 0.893336) 72.03%, rgba(254, 217, 24, 0.9) 88%);',
+        ecommerce: 'url(./assets/ecommerce-app.png)',
       }),
       fontFamily: {
         playfair: ['Playfair Display', 'serif'],
@@ -40,6 +44,8 @@ export default {
         person1: "url('./assets/person-1.png')",
         person2: "url('./assets/person-2.png')",
         person3: "url('./assets/person-3.png')",
+        dashboard: "url('./assets/dashboard.png')",
+        blog: "url('./assets/blog.png')",
       },
       screens: {
         xs: '480px',

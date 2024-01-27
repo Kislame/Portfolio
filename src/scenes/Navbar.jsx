@@ -1,128 +1,78 @@
 import { useState } from 'react';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
-import useMediaQuery from '../hooks/useMediaQuery';
+import { menuSlide } from '../animations/anim';
+import { motion as m, AnimatePresence } from 'framer-motion';
 
-const Link = ({ page, selectedPage, setSelectedPage, isTopOfPage }) => {
-  const lowerCasePage = page.toLowerCase();
+const RenderLinks = () => {
+  const navLinks = ['home', 'skills', 'projects', 'contacts'];
+  const handleNav = (title) => {
+    document.getElementById(title).scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
   return (
-    <AnchorLink
-      className={` ${
-        isTopOfPage ? '' : 'text-white'
-      }  hover:text-yellow transition duration-500 text-lg`}
-      href={`#${lowerCasePage}`}
-      onClick={() => setSelectedPage(lowerCasePage)}
+    <ul
+      className="
+    flex flex-col gap-10 items-center mt-20 p-[100px]
+     text-4xl"
     >
-      {page}
-    </AnchorLink>
+      {navLinks.map((title, i) => (
+        <li className="hover:text-orange-200 transition duration-500" key={i}>
+          <button onClick={() => handleNav(title)}>{title}</button>
+        </li>
+      ))}
+    </ul>
   );
 };
 
 const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isAboveSmallScreens = useMediaQuery('(min-width: 768px)');
   const navbarBackground = isTopOfPage ? '' : 'bg-primary';
+  const handleClick = (e) => {
+    e.stopPropagation();
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <nav
-      className={` text-white ${navbarBackground} z-40 w-full fixed top-0 py-6`}
+      className={` text-white ${navbarBackground} z-40 w-full sticky top-0 sm:py-6 py-3`}
     >
       <div className=" flex items-center justify-between mx-auto  w-5/6">
         <h4
           className={`font-playfair text-4xl font-bold ${
-            isTopOfPage ? '' : 'text-white'
+            selectedPage === 'skills' ? 'text-black' : 'text-white'
           }`}
         >
           KMI
         </h4>
-        {isAboveSmallScreens ? (
-          <div className="flex justify-between gap-16 font-opensans text-sm font-semibold">
-            <Link
-              page="Home"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-              isTopOfPage={isTopOfPage}
-            />
-            <Link
-              page="Skills"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-              isTopOfPage={isTopOfPage}
-            />
-            <Link
-              page="Projects"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-              isTopOfPage={isTopOfPage}
-            />
-            <Link
-              page="Contacts"
-              selectedPage={selectedPage}
-              setSelectedPage={setSelectedPage}
-              isTopOfPage={isTopOfPage}
-            />
-          </div>
-        ) : (
-          <button
-            className="rounded-full bg-cool-gray p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-6 h-6"
+        <button
+          onClick={handleClick}
+          className=" z-40 w-20 h-20 rounded-full flex items-center justify-center  "
+        >
+          <span
+            className={` relative   w-full  after:block after:bg-p-gray after:m-auto after:w-[40%] after:h-[1px] after:relative after:transition-transform after:duration-300 after:ease-out
+          after:top-[-5px]  before:block before:bg-p-gray before:m-auto before:w-[40%] before:h-[1px] before:relative before:transition-transform before:duration-300 before:ease-out
+          before:top-[5px] ${
+            isMenuOpen
+              ? 'after:rotate-45 after:top-[2px]  before:-rotate-45 '
+              : ''
+          }
+          `}
+          ></span>
+        </button>
+
+        <AnimatePresence mode="wait">
+          {isMenuOpen && (
+            <m.div
+              variants={menuSlide}
+              initial="initial"
+              animate="enter"
+              exit="exit"
+              className="fixed flex flex-col justify-center z-5 right-0 bottom-0 h-full bg-curved-gray  "
             >
-              <path
-                fillRule="evenodd"
-                d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm8.25 5.25a.75.75 0 01.75-.75h8.25a.75.75 0 010 1.5H12a.75.75 0 01-.75-.75z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-        )}
-        {!isAboveSmallScreens && isMenuOpen && (
-          <div className="fixed right-0 bottom-0 h-full bg-primary w-[300px]">
-            <div className="flex justify-end p-12 ">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
-                    fill="white"
-                    fillOpacity="0.54"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="flex flex-col gap-10 ml-[33%] text-2xl text-deep-blue">
-              <Link
-                page="Home"
-                selectedPage={selectedPage}
-                setSelectedPage={setSelectedPage}
-              />
-              <Link
-                page="Skills"
-                selectedPage={selectedPage}
-                setSelectedPage={setSelectedPage}
-              />
-              <Link
-                page="Projects"
-                selectedPage={selectedPage}
-                setSelectedPage={setSelectedPage}
-              />
-              <Link
-                page="Contacts"
-                selectedPage={selectedPage}
-                setSelectedPage={setSelectedPage}
-              />
-            </div>
-          </div>
-        )}
+              <RenderLinks />
+            </m.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );

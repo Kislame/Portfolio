@@ -1,39 +1,54 @@
-import { useState, useEffect } from 'react';
-import useMediaquery from './hooks/useMediaQuery';
-// import Landing from './scenes/Landing';
-import Navbar from './scenes/Navbar';
+import { useState, useEffect, useRef } from 'react';
 
-// import MySkills from './scenes/MySkills';
-// import { motion } from 'framer-motion';
-// import Projects from './scenes/Projects';
-// import Contact from './scenes/Contact';
-// import DotGroup from './scenes/DotGroup';
+import Landing from './scenes/Landing';
+import Navbar from './scenes/Navbar';
+import DotLinks from './components/DotLinks';
+import Projects from './scenes/Projects';
+import Contact from './scenes/Contact';
+
+import { motion as m } from 'framer-motion';
+import MySkills from './scenes/MySkills';
 
 function App() {
   const [selectedPage, setSelectedPage] = useState('home');
   const [isTopOfPage, setIsTopOfPage] = useState(true);
-  // const isAboveMediumScreens = useMediaquery('(min-width: 1060px)');
+  const ref = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY === 0) {
-        setIsTopOfPage(true);
-        setSelectedPage('home');
-      }
-      if (window.scrollY !== 0) setIsTopOfPage(false);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const container = ref.current;
+
+    function handleScroll(event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      const delta = event.deltaY;
+
+      container.scrollBy({
+        top: delta,
+        behavior: 'smooth',
+      });
+    }
+    container.addEventListener('wheel', handleScroll);
+
+    return () => container.removeEventListener('wheel', handleScroll);
   }, []);
 
   return (
-    <div className="app">
+    <m.div ref={ref} className="app  snap-y snap-mandatory scroll-smooth">
       <Navbar
         isTopOfPage={isTopOfPage}
         selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}
       />
-    </div>
+      <DotLinks selectedPage={selectedPage} />
+
+      <Landing setSelectedPage={setSelectedPage} />
+
+      <MySkills setSelectedPage={setSelectedPage} />
+
+      <Projects setSelectedPage={setSelectedPage} />
+      <Contact setSelectedPage={setSelectedPage} />
+    </m.div>
   );
 }
 

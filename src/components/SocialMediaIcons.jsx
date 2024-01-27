@@ -1,9 +1,9 @@
 const SocialMediaIcons = () => {
   return (
-    <div className="flex  sm:justify-start my-10 gap-7">
+    <div className="flex  sm:justify-start my-10 gap-4">
       <a
         className="hover:opacity-50 transition duration-500"
-        href="https://www.linkedin.com"
+        href="https://www.linkedin.com/in/kraila-mohammed-islam-912358241/"
         target="_blank"
         rel="noreferrer"
       >
@@ -15,7 +15,7 @@ const SocialMediaIcons = () => {
       </a>
       <a
         className="hover:opacity-50 transition duration-500"
-        href="https://www.twitter.com"
+        href="https://github.com/Kislame?tab=repositories"
         target="_blank"
         rel="noreferrer"
       >
@@ -27,7 +27,7 @@ const SocialMediaIcons = () => {
       </a>
       <a
         className="hover:opacity-50 transition duration-500"
-        href="https://www.facebook.com"
+        href="https://www.facebook.com/kraila.islame.77/"
         target="_blank"
         rel="noreferrer"
       >
@@ -37,7 +37,7 @@ const SocialMediaIcons = () => {
           className="w-10 h-10"
         />
       </a>
-      <a
+      {/* <a
         className="hover:opacity-50 transition duration-500"
         href="https://www.instagram.com"
         target="_blank"
@@ -48,7 +48,7 @@ const SocialMediaIcons = () => {
           src="/assets/instagram-svgrepo-com.svg"
           className="w-10 h-10"
         />
-      </a>
+      </a> */}
     </div>
   );
 };
