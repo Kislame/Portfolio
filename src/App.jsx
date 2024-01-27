@@ -19,7 +19,6 @@ function App() {
 
     function handleScroll(event) {
       event.stopPropagation();
-      event.preventDefault();
 
       const delta = event.deltaY;
 
@@ -28,7 +27,7 @@ function App() {
         behavior: 'smooth',
       });
     }
-    container.addEventListener('wheel', handleScroll, { passive: true });
+    container.addEventListener('wheel', handleScroll);
 
     return () => container.removeEventListener('wheel', handleScroll);
   }, []);

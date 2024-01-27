@@ -36,7 +36,7 @@ const Contact = ({ setSelectedPage }) => {
         className="flex justify-center w-full"
       >
         <div>
-          <h2 className="font-playfair font-semibold ss:text-4xl  text-center text-xl mb-8">
+          <h2 className="font-playfair font-semibold ss:text-4xl  text-center text-xl ss:mb-8 mb-2">
             CONTACT ME TO GET STARTED
           </h2>
         </div>
