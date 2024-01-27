@@ -27,7 +27,7 @@ function App() {
         behavior: 'smooth',
       });
     }
-    container.addEventListener('wheel', handleScroll);
+    container.addEventListener('wheel', handleScroll, { passive: true });
 
     return () => container.removeEventListener('wheel', handleScroll);
   }, []);
